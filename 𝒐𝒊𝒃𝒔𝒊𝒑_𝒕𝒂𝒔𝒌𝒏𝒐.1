@@ -1,0 +1,85 @@
+import java.util.Scanner;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter your login id: ");
+        String loginId = scanner.nextLine();
+        System.out.print("Enter your password: ");
+        String password = scanner.nextLine();
+        
+        if (isValidLogin(loginId, password)) {
+            System.out.println("Login successful!");
+            System.out.println("\nReservation Form");
+            System.out.println("Enter your basic details: ");
+            System.out.print("  your name: ");
+            String Name = scanner.nextLine();
+            System.out.print("  Address: ");
+            String Address = scanner.nextLine();
+            System.out.print("  Enter your phno: ");
+            String Phno = scanner.nextLine();
+            System.out.print("Enter train number: ");
+            int trainNumber = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline
+            String trainName = getTrainName(trainNumber); // Assuming a method to get train name
+            System.out.print("Enter class type: ");
+            String classType = scanner.nextLine();
+            System.out.print("Enter date of journey: ");
+            String dateOfJourney = scanner.nextLine();
+            System.out.print("Enter from (place): ");
+            String fromPlace = scanner.nextLine();
+            System.out.print("Enter destination: ");
+            String destination = scanner.nextLine();
+            boolean isInserted = insertReservation(Name, Address, Phno, trainNumber, trainName, classType, dateOfJourney, fromPlace, destination);
+            if (isInserted) {
+                System.out.println("Reservation successful!");
+            } else {
+                System.out.println("Reservation failed. Please try again.");
+            }
+            System.out.println("\nCancellation Form");
+            System.out.print("Enter PNR number for cancellation: ");
+            String pnrNumber = scanner.nextLine();
+            displayCancellationDetails(pnrNumber);
+            System.out.println("Press OK to confirm cancellation (yes/no): ");
+            String confirmCancellation = scanner.nextLine();
+            if (confirmCancellation.equalsIgnoreCase("yes")) {
+                boolean isCancelled = cancelReservation(pnrNumber);
+                if (isCancelled) {
+                    System.out.println("Cancellation successful!");
+                } else {
+                    System.out.println("Cancellation failed. Please try again.");
+                }
+            } else {
+                System.out.println("Cancellation not confirmed.");
+            }
+        } else {
+            System.out.println("Invalid login credentials. Exiting...");
+        }
+        
+        scanner.close();
+    }
+    
+    
+    static boolean isValidLogin(String loginId, String password) {
+        return loginId.equals("amazon") && password.equals("flipcart");
+    }
+    
+    static String getTrainName(int trainNumber) {
+        return "Sample Train";
+    }
+    
+    static boolean insertReservation(String Name, String Address, String Phno, int trainNumber, String trainName,
+                                     String classType, String dateOfJourney,
+                                     String fromPlace, String destination) {
+        return true; 
+    }
+    
+    static void displayCancellationDetails(String pnrNumber) {
+        System.out.println("Cancellation details for PNR: " + pnrNumber);
+    }
+    
+    static boolean cancelReservation(String pnrNumber) {
+        return true; 
+    }
+}
